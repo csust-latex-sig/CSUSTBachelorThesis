@@ -1,0 +1,97 @@
+\documentclass[border={0pt -9.1pt 0pt -1.5pt}]{standalone}
+%
+\usepackage{basicsty}
+%
+\begin{document} 
+
+\begin{tikzpicture}
+    \node (1) {
+\begin{minipage}{6.5cm}
+\begin{lstlisting}[numbers=none]
+ /* 由双引号包裹字符串识别规则关键代码 */
+ /* 由单引号包裹字符串的识别规则类似 */
+<INITIAL>\" { BIGIN STRING_D; }
+<STRING_D>  {
+    \n      {/* 错误处理，字符串不能跨行 */}
+    <<EOF>> {/* 错误处理，非预期的文件尾 */}
+    \"      {BEGIN INITIAL;/* 返回完整字符串*/}
+    \\\\    {/* 转义字符 \\ */}
+    \\t     {/* 转义字符 \t */}
+    \\n     {/* 转义字符 \n */}
+    \\\"    {/* 转义字符 \" */}
+    \\.     {/* 其他转义字符 */}
+    .       {/* 其他字符 */}
+}
+\end{lstlisting}
+\end{minipage}
+    };
+%  \end{tikzpicture} 
+
+% \begin{tikzpicture}
+    \node[right=of 1] {
+\begin{minipage}{6cm}
+\begin{lstlisting}[numbers=none]
+ /*多行注释识别规则关键代码*/
+ /*单行注释只需以 # 开头，换行或文件尾结束*/
+<INITIAL>(*  { BEGIN BO_COMMENT; }
+<BO_COMMENT> {
+    \n       { /*更新行数，抛弃*/ }
+    <<EOF>>  {/*错误处理，非预期的文件尾*/}
+    *)       { BEGIN INITIAL; /*注释结束*/ }
+    .        {/*其他字符，直接丢弃*/}
+}
+\end{lstlisting}    
+\end{minipage}
+    };
+ \end{tikzpicture} 
+
+% \begin{tikzpicture}
+%     \node {
+%         \begin{minipage}{5cm}
+%         \begin{lstlisting}[language=C]
+% /* C 语言 switch 语句 */
+% a = 2;
+% switch(a) {
+% case 1: printf("1");
+% case 2: printf("2");
+% case 3: printf("3");
+% default: printf("other");
+% }  /* 输出: 23other */
+%         \end{lstlisting}
+%         \end{minipage}
+%     };
+%  \end{tikzpicture} 
+
+% \begin{tikzpicture}
+%     \node {
+%         \begin{minipage}{5cm}
+%         \begin{lstlisting}[]
+% # BO 语言 switch 语句
+% a : 2;
+% switch (a)
+% case (1) { print(1); }
+% case (2) { print(2); }
+% case (3) { print(3); }
+% default { print("other"); }
+% # 输出: 2
+%         \end{lstlisting}
+%         \end{minipage}
+%     };
+%  \end{tikzpicture} 
+
+\end{document}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Executable
+% struct Executable {
+%     std::vector<PackageName> imports;  // 所需包名
+%     std::vector<ConstantPool> constant_pool;  // 常量池
+%     ByteCode top_level;  // 顶层结构字节码
+%     std::vector<Bytecode> function;  // 函数体字节码
+%     /* 调试信息 */
+%     std::vector<Variable> global_variable;
+%     std::vector<Function> function_definition;
+%     std::vector<Class> class_definition;
+%     std::vector<TypeSpecifier> type_specifier;
+% };

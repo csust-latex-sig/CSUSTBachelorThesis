@@ -1,0 +1,61 @@
+% Identification
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{basicsty}[2022/05/27]
+
+\RequirePackage{listings}  % 代码环境
+% 代码样式设置
+\lstset{basicstyle=\footnotesize\ttfamily, flexiblecolumns, numbers=left, numbersep=5pt, numberstyle=\tiny, backgroundcolor=\color{white}, frame=single, breaklines=true, showtabs=false, showspaces=false, showstringspaces=false, keywordstyle=\color{teal}, commentstyle=\color{blue}, stringstyle=\color{red}, numberstyle=\color{gray}, tabsize=8, breakatwhitespace=false, postbreak=\mbox{\textcolor{violet}{$\hookrightarrow$}\space}} %% 代码抄录的一系列设置
+%
+
+\RequirePackage{ctex}
+\RequirePackage[dvipsnames, svgnames, x11names]{xcolor}
+\RequirePackage{tikz}
+
+%====================字体设置====================%
+\setCJKfamilyfont{SimSun}[AutoFakeBold={2.17}]{宋体}
+\setCJKfamilyfont{SimHei}[AutoFakeBold={2.17}]{黑体}
+\setCJKfamilyfont{KaiTi}[AutoFakeBold={2.17}]{楷体}
+%====================定义字体命令====================%
+\def\songti{\CJKfamily{SimSun}}
+\def\heiti{\CJKfamily{SimHei}}
+\def\kaiti{\CJKfamily{KaiTi}}
+% 设置默认字体，中文默认宋体，西文默认 Times New Roman
+\setmainfont{Times New Roman}
+\setCJKmainfont{宋体}[AutoFakeBold={2.17}]
+
+
+\usetikzlibrary{positioning, arrows.meta, calc, shapes, arrows}
+
+% 定义方框样式
+\tikzset{
+  rect1/.style = {
+    shape = rectangle,
+    draw = black,
+    text width = 3cm,
+    align = center,
+    minimum height = 1cm,
+  }
+}
+% 定义箭头样式
+\tikzset{
+  arrow1/.style = {
+    draw = purple, thick, -{Latex[length = 4mm, width = 1.5mm]},
+  }
+}
+% 双箭头
+\tikzset{
+  arrow2/.style = {
+    draw = purple, thick, {Latex[length = 4mm, width = 1.5mm]}-{Latex[length = 4mm, width = 1.5mm]},
+  }
+}
+
+% 流程图样式
+\tikzstyle{decision} = [diamond, draw, aspect=2, minimum height=2em,
+    text width=2.7cm, text badly centered, inner sep=0pt]
+\tikzstyle{start} = [rectangle, draw, 
+    text width=2cm, text centered, rounded corners, minimum height=2em]
+\tikzstyle{process} = [rectangle, draw, 
+    text width=3cm, text centered, minimum height=2em]
+% \tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, % node distance=3cm,
+    minimum height=2em]

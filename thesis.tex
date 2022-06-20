@@ -1,0 +1,49 @@
+\documentclass{csustThesis}
+\addbibresource[location=local]{reference.bib}
+
+\input{baseinfo.tex}
+
+\begin{document}
+
+\include{body/prepages.tex}
+
+%% 摘要开始需要页眉，已在文档类 csustThesis 中设置 %%
+
+\include{body/abstract.tex}  % 摘要
+
+\makecontents  % 目录
+
+%% 正文开始加上页脚
+\fancyfoot[C]{\zihao{-5} 第 \thepage 页，共 \pageref{LastPage} 页}  % 设置页脚中心
+\pagenumbering{arabic}  % 页脚采用阿拉伯数字编号
+%%
+
+\include{body/introduction.tex}  % 第1章 绪论
+
+\include{body/tools.tex}  % 第2章 LaTeX 简介
+
+\include{body/design.tex}  % 第3章 模板设计与实现
+
+\include{body/specification.tex}  % 第4章 模板使用说明
+
+% \include{body/detailed_design.tex}
+
+% \include{body/system_testing.tex}
+
+\include{body/summary.tex}
+
+%% 参考文献开始一级标题不编号
+% \ctexset{section/numbering=false}
+\setcounter{secnumdepth}{0}
+%%
+
+\chap{参考文献}
+
+\printbibliography[heading=none]
+
+\chap{致谢}
+
+\include{body/appendix.tex}
+
+\end{document}
+

@@ -1,0 +1,53 @@
+\appendix  % 附录开始
+
+\chap{附录撰写示例}  % 附录 A
+\sect{附录的二级标题实例}
+本模板不会将附录的二级标题加入目录，如有需要，请自行实现。
+\subsect{附录的三级标题实例}
+本模板不会将附录的三级标题加入目录，如有需要，请自行实现。
+\sect{附录图表示例}
+
+长沙理工大学校徽如图 \ref{fig:appendix:csustlogo} 所示。  % 使用 \ref 命令引用图片标签
+
+\begin{figure}[htbp]  % htbp选项允许浮动体出现在任意位置，后文详述
+  \centering  % 表格居中
+  \includegraphics[scale=.5]{figure/csustlogo_626by572.jpg}  % 选项代表缩小到原图的 0.5 倍。
+  \caption{长沙理工大学校徽}  % 图题
+  \label{fig:appendix:csustlogo}  % 定义标签，方便引用该图
+\end{figure}
+
+浮动体选项及其含义如表 \ref{tab:appendix:floatchoice} 所示。
+
+\begin{table}[htbp]
+  \centering  % 表格居中
+  \zihao{5}  % 五号字体
+  \caption{浮动体选项及其含义}
+  % \vspace{-3mm}
+  \begin{tabular}[]{ll}
+      \toprule   % 三线表的第一条线
+      表项      & 含义            \\
+      \midrule   % 三线表的第二条线
+        !       &  忽略一些严格的限制   \\
+        h       &  如果可以，放在当前位置   \\
+        t       &  允许放在顶部   \\
+        b       &  允许放在底部  \\
+        p       &  运行放在浮动栏或浮动页   \\
+        H       &  禁止浮动   \\
+      \bottomrule   % 三线表的第三条线
+  \end{tabular}
+  \label{tab:appendix:floatchoice}  % 注意：这不是伪代码
+\end{table}
+
+
+\chap{文档类 csustThesis 完整代码}  % 附录 B
+\sect{标题1}
+\subsect{标题11}
+\sect{标题2}
+\subsect{标题21}
+
+
+\chap{插图与表格汇总}  % 附录 C
+
+\listoffigures
+
+\listoftables

@@ -1,0 +1,26 @@
+\documentclass[border=15pt]{standalone}
+%
+\usepackage{basicsty}
+%
+\begin{document} 
+
+\begin{tikzpicture}
+    % 绘制中间方框
+    \node[rect1] (scanner) {Scanner};
+    \node[rect1, below = of scanner] (parser) {Parser};
+    \node[rect1, below = of parser] (semantic) {语义分析子程序};
+    \node[rect1, below = of semantic] (generator) {代码生成子程序};
+    \node[rect1, below = of generator] (optimizer) {代码优化子程序};
+    % 绘制中间连线
+    \draw[arrow1](0, 50pt) node[right, yshift = -15pt] {字符流} -- (scanner);
+    \draw[arrow1](scanner) -- node[right]{token流} (parser);
+    \draw[arrow1](parser) -- node[right]{初步构建的语法树} (semantic);
+    \draw[arrow1](semantic) -- node[right]{修正后的语法树} (generator);
+    \draw[arrow1](generator) -- node[right]{字节码} (optimizer);
+    \draw[arrow1](optimizer) -- node[right, yshift = 5pt, xshift = 5pt]{优化后的字节码}++(0, -50pt);
+    % 绘制虚线框
+    % \draw[thick, dashed, draw = purple](-125pt, 27pt)node[below right]{编译器前端} -- (125pt, 27pt) -- (125pt, -250pt) -- (-125pt, -250pt)node[above right]{编译器后端} -- (-125pt, 27pt);
+    % \draw[thick, dashed, draw = purple](-125pt, -135pt) -- (125pt, -135pt);
+ \end{tikzpicture} 
+
+\end{document}

@@ -1,0 +1,138 @@
+
+\chap{模板设计与实现}
+本模板遵循2020年10月发布的\href{https://www.csust.edu.cn/jwc/info/1142/3568.htm}{《长沙理工大学本科毕业设计撰写规范》}（以下简称《撰写规范》）。本文于2022年6月撰写，若今后学校模板发生变化，请自行更改模板。
+
+\sect{目录结构}
+
+\sect{论文模板全局设置}
+本模板的大部分设置都已封装在 csustThesis 文档类中，该文档类的内容可在文件 csustThesis.cls 中找到。 csustThesis 文档类基于 article 基本文档类和 ctex 宏包实现。
+
+\subsect{字体字号设置}
+
+本模板中文字体采用 Windows 系统自带的宋体、黑体\footnote{使用其他操作系统的用户请自行安装相应字体或者更改模板设置。}。中文字体默认采用宋体，西文字体默认采用 Times New Roman 。
+\begin{lstlisting}[numbers=none,language=TeX]
+% 默认字体设置
+\setCJKmainfont{宋体}[AutoFakeBold={2.17}]  % 中文默认使用 Windows 系统自带的宋体
+\setmainfont{Times New Roman}  % 西文默认使用 Times New Roman
+% 使用 Windows 系统自带的黑体
+\setCJKfamilyfont{SimHei}[AutoFakeBold={2.17}]{黑体}
+\def\heiti{\CJKfamily{SimHei}}
+\end{lstlisting}
+
+正文字号为小四、1.5倍行距，在引入 ctex 宏包时配置选项。
+\begin{lstlisting}[numbers=none,language=TeX]
+\RequirePackage[zihao=-4,heading=true,linespread=1.5]{ctex}
+\end{lstlisting}
+
+\subsect{页面布局设置}
+
+本模板页面采用 A4 大小编排，并设置 上边距 25mm、下边距 20mm、左边距 30mm、右边距 20mm。
+\begin{lstlisting}[numbers=none,language=TeX]
+\RequirePackage[a4paper,top=25mm,bottom=20mm,left=30mm,right=20mm]{geometry}
+\end{lstlisting}
+
+设置页面页眉左侧为 \fbox{\includegraphics[height=1.15cm]{figure/csust_logo_and_name2.pdf}} 、右侧为小论文标题，设置页脚中心为阿拉伯数字编号的“第几页，共几页”样式。页眉页脚文字均为小五号宋体。出于方便考虑，页脚的设置并没有封装在 csustThesis 文档类中。
+\begin{lstlisting}[numbers=none,language=TeX]
+% 页眉页脚预设置
+\pagestyle{fancy}
+\fancyhf{}
+
+% 页眉设置
+\fancyhead[L]{  % 设置页眉左侧
+    \raisebox{-.1cm}{\includegraphics[height=1.15cm]{figure/csust_logo_and_name2.pdf}}
+}
+\fancyhead[R]{\let\\=\relax\heiti\zihao{-5}\csustThesis@title}  % 设置页眉右侧
+
+%% 正文开始加上页脚
+\fancyfoot[C]{\zihao{-5} 第 \thepage 页，共 \pageref{LastPage} 页}  % 设置页脚中中心
+\pagenumbering{arabic}  % 页脚采用阿拉伯数字编号
+%%
+\end{lstlisting}
+
+\subsect{标题设置}
+本模板支持三级标题，一级标题样式为黑体小三居中，使用命令 \verb!\chap! 定义；二级标题样式为黑体四号顶格，使用命令 \verb!\sect! 定义；三级标题样式为黑体小四且缩进两字符，使用命令 \verb!\subsect! 定义。
+\begin{lstlisting}[numbers=none,language=TeX]
+% 标题设置
+\ctexset{
+	section = {  % 一级标题
+		format = \centering\heiti\zihao{-3},  % 黑体小三居中
+		name = {第, 章},  % 章节编号为 “第几章”
+	},
+	subsection = {  % 二级标题
+		format = \heiti\zihao{4},  % 黑体四号
+	},
+	subsubsection = {  % 三级标题
+		format = \heiti\zihao{-4},  % 黑体小四
+        indent = 2\ccwd,  % 缩进两字符
+	}
+}
+
+\newcommand{\chap}[1]{%
+	\clearpage  % 每章另起一页
+    \FloatBarrier  % 清除浮动体，也就是输出上一章的图表
+    \vspace*{-.5\baselineskip}  % 调整章标题与页眉顶部的间距
+	\section{#1}
+}
+\newcommand{\sect}[1]{\subsection{#1}}
+\newcommand{\subsect}[1]{\subsubsection{#1}}
+\end{lstlisting}
+
+\subsect{图表名格式设置}
+本模板支持图（figure）和表（table）两种浮动体，且支持图表名自动按章节编号。图题为五号字体，图序为“图几.几”格式。表题为五号\textbf{加粗}字体，表序为“表几-几”格式。
+
+\begin{lstlisting}[numbers=none]
+\captionsetup{font=small,labelsep=space}  % 图表标题设为五号字体、序号与图表名之间以空格分隔
+\captionsetup[table]{font={small,bf},labelsep=space}  % 表标题设为五号加粗、表序与表名之间以空格分隔
+\counterwithin{figure}{section}  % 图按章节编号
+\counterwithin{table}{section}  % 表按章节编号
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}  % 图几.几
+\renewcommand{\thetable}{\thesection-\arabic{table}}  % 表几-几
+\end{lstlisting}
+
+\subsect{代码抄录环境设置}
+本模板的代码抄录使用 listings 宏包的 \verb!lstlisting! 环境、通过 \verb!\lstset! 进行全局设置。默认白色背景、有边框、有行号等等。
+
+\subsect{附录设置}
+本模板重写了基本文档类的 \verb!\appendix! 命令。
+
+附录与正文的区别主要有：一级标题样式变为黑体三号居中、采用大写字母编号；插图与表格的编号没有分隔符，如图A1、表B2。
+
+官网模板的撰写规范和样张中都没有体现附录的二级标题与三级标题如何处理，因此本模板附录的二、三级标题样式\textcolor{red}{保持与正文一致，但不编入目录}。
+
+\sect{封面与扉页的设计}
+本模板的封面和扉页均参考\href{https://www.csust.edu.cn/jwc/info/1142/3596.htm}{《毕业设计（论文）封面、扉页》}设计，对应的命令分别为 \verb!\makecover! 和 \verb!\maketitle! 。
+
+封面题目采用宋体小二加粗并居中、扉页题目采用黑体二号加粗并居中。应填写的信息均采用宋体三号加粗并居中。
+
+\sect{摘要与目录的设计}
+本模板的摘要和目录均参考\href{https://www.csust.edu.cn/jwc/info/1142/3595.htm}{《长沙理工大学本科毕业设计（论文）撰写规范样张》}设计。模板提供了中英文摘要环境 \verb!abstract! 和 \verb!abstract*! 、和封面制作命令 \verb!\makecontents!。
+
+中文摘要的论文题目采用黑体三号居中、“摘要”字样为黑体小三居中、“关键词”字样采用黑体四号。
+
+英文摘要的论文题目采用粗体三号居中且一律大写、“ABSTRACT”字样采用粗体小三、“Key words”字样采用粗体四号。
+
+“目录”字样采用黑体三号居中。目录中第一级标题采用黑体。
+
+
+\sect{外文译文及原文封面的设计}
+本模板的外文译文及原文封面参考\href{https://www.csust.edu.cn/jwc/info/1142/3598.htm}{《外文译文及原文》}设计，对应的命令为\\ \verb!\makeTranslationCover! 。
+
+外文译文及原文封面应填写的信息均采用宋体三号加粗并居中。
+
+\sect{开题报告的设计}
+本模板的开题报告参考\href{https://www.csust.edu.cn/jwc/info/1142/3599.htm}{《毕业设计（论文）开题报告（参考格式）》}设计。制作开题报告封面的命令为 \verb!\makeResearchProposalCover! 。
+
+开题报告封面的题目采用宋体小二加粗并居中、应填写的信息均采用宋体三号加粗并居中。
+
+开题报告正文的文本框采用自定义的 \verb!ubox! 环境实现，用到了 tcolorbox 宏包。
+
+
+\sect{任务书的设计}
+本模板的任务书参考\href{https://www.csust.edu.cn/jwc/info/1142/3600.htm}{《长沙理工大学毕业设计（论文）任务书》}设计。
+
+任务书的封面除“任务起止日期”一栏采用小四号字体，其余需要填写信息的地方均采用四号字体。本模板将任务书封面的信息做了整体居中处理\footnote{官方的任务书封面为整体靠左对齐。}。
+
+任务书正文的文本框采用自定义的 \verb!ubox! 环境实现，用到了 tcolorbox 宏包。
+
+\textcolor{red}{任务书最后三面尚未制作}，若有需要，请自行制作，或者联系 2234321228@qq.com 交流制作。制作提示：可借鉴\href{https://stackoverflow.com/questions/2812892/change-paper-size-in-the-middle-of-a-latex-document}{这个帖子中}提到的方式临时改变页面尺寸，然后绘制横向表格；工作进度计划表的填空接口可以行为单位实现，通过指定工作任务和周次自动填充表格\footnote{这样说起来比较空洞，按照自己的想法、能够实现需求即可。}。
+
