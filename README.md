@@ -1,1 +1,3 @@
-"# A CSUST Bachelor thesis template based on LaTeX system" 
+# A CSUST Bachelor thesis template based on LaTeX system
+
+$a^2$
