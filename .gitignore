@@ -342,3 +342,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/tex,windows
+
+# my add
+# temporary files
+*.tmp
