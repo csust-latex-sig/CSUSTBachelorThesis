@@ -26,7 +26,7 @@
 \RequirePackage{makecell}  % 表格线宽支持
 \RequirePackage{booktabs}  % 三线表支持
 \RequirePackage{bigstrut} %% 该宏包提供 \bigstrut 命令，可以增大表格的行间距
-\RequirePackage[backend=biber,style=gb7714-2015,gbnamefmt=lowercase,refsegment=part,defernumbers=true,]{biblatex}  % 支持参考文献
+\RequirePackage[backend=biber,style=gb7714-1987,gbnamefmt=lowercase,refsegment=part,defernumbers=true,gbtype=true,]{biblatex}  % 支持参考文献
 \RequirePackage{emptypage} %% 此宏包负责的任务是当每一章最后一页是偶数页时，设置空白
 \RequirePackage{tikz}
 \RequirePackage{indentfirst}
