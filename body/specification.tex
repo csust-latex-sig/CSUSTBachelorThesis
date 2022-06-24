@@ -3,7 +3,7 @@
 
 \chap{模板使用说明}
 \label{chap:模板使用说明}
-本章将假定读者已经正确安装和配置 \LaTeX ，如果还没有正确安装，请参考第 \ref{chap_tools} 章。
+本章将假定读者已经正确安装 \TeX{} Live 发行版，如果还没有正确安装，请参考第 \ref{chap_tools} 章。
 
 \sect{模板兼容性检查}
 \label{sec_check}  % 供后文引用
@@ -25,7 +25,7 @@
 % \end{enumerate}
 % \end{varwidth}
 
-建议每写一部分就编译一次，缩小编译错误的查找范围。
+建议每写一部分就编译一次，缩小错误排查范围。
 
 \hltext{该模板任务书后三面尚未制作}，若仍要坚持使用该模板，可以在打印时单独打印 word 版任务书的后三面。也可将  word 版任务书的后三面导出为 pdf ，并在\href{https://www.ilovepdf.com/zh-cn/merge_pdf}{这个网站}合并 pdf。
 
@@ -41,7 +41,7 @@
 
 （4）依次使用 XeLaTeX、Biber、XeLaTeX、XeLaTeX 四次编译文件 \filename{researchProposal.tex}。
 
-建议每写一部分就编译一次，缩小编译错误的查找范围。
+建议每写一部分就编译一次，缩小错误排查范围。
 
 \sect{撰写外文译文及原文}
 
@@ -55,7 +55,7 @@
 
 （4）依次使用 XeLaTeX、Biber、XeLaTeX、XeLaTeX 四次编译文件 \filename{translation.tex}；若没有目录、参考文献和交叉引用，使用一次 XeLaTeX 编译即可。
 
-建议每写一部分就编译一次，缩小编译错误的查找范围。
+建议每写一部分就编译一次，缩小错误排查范围。
 
 
 \sect{撰写论文正文}
@@ -70,7 +70,7 @@
 
 （4）依次使用 XeLaTeX、Biber、XeLaTeX、XeLaTeX 四次编译文件 \filename{thesis.tex}。
 
-建议每写一部分就编译一次，缩小编译错误的查找范围。
+建议每写一部分就编译一次，缩小错误排查范围。
 
 由于正文内容较多，因此\textbf{强烈建议}将不同章节的内容写入多个 tex 文件，并用 \verb!\include! 命令导入。
 
@@ -210,7 +210,11 @@ F_{n}=\left\lfloor \dfrac{1}{\sqrt{5}}\left( \dfrac{\sqrt{5}+1}{2}\right) ^{n}+\
 
 相信初次看到本文的大部分同学还在以最原始的方式手动调整参考文献。 \LaTeX{} 也可以通过上标命令 \verb!$^\text{[编号]}$! 的方式手动引用，效果就像这样 $^\text{[编号]}$ 。然而通过这种方式管理的参考文献难以维护：只要稍微对文献调整一下，整个顺序编号都要重新变动。
 
-因此推荐使用 BibLaTeX 自动管理参考文献，包括文献自动编号和自动根据引用顺序排列。引用参考文献的命令包括 \verb!\cite! 和 \verb!\parencite! ， 效果就像这样 \cite{sample} 和这样\parencite{sample}，点击编号可以跳转到对应的参考文献条目。
+因此推荐使用 BibLaTeX 自动管理参考文献的引用和列表，biblatex 宏包已经引入，在 \filename{reference.bib} 文件中导入参考文献条目后，正文中直接引用即可。引用参考文献的命令包括 \verb!\cite! 和 \verb!\parencite! ， 效果就像这样 \cite{sample} 和这样\parencite{sample}，点击编号可以跳转到对应的参考文献条目。
+
+不知道如何使用 BibLaTeX 管理参考文献的同学可以参考这篇教程 \href{https://www.overleaf.com/learn/latex/Bibliography_management_with_biblatex}{Bibliography management with biblatex}。
+
+可以手动在 bib 文件中添加参考文献条目，但还是推荐使用 \href{https://www.jabref.org/}{JabRef} 或者其他工具进行可视化添加，避免 bib 文件的编译错误。
 
 
 \sect{辅助工具}
