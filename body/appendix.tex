@@ -40,10 +40,174 @@
 
 
 \chap{文档类 csustThesis 完整代码}  % 附录 B
-\sect{标题1}
-\subsect{标题11}
-\sect{标题2}
-\subsect{标题21}
+\begin{lstlisting}[numbers=none,frame=none]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 文档类 csustThesis 的完整代码以文件 csustThesis.cls 中的内容为准。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Identification
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{csustThesis}[2022/05/11 Unofficial LaTeX Document Class for CSUST Bachelor Thesis]
+
+% Preliminary declarations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 基本文档类及引入的宏包 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\LoadClass{article}
+\RequirePackage[zihao=-4,heading=true,linespread=1.5]{ctex}
+\RequirePackage[a4paper,top=25mm,bottom=20mm,left=30mm,right=20mm]{geometry}
+\RequirePackage[colorlinks, linkcolor=blue, anchorcolor=yellow, citecolor=red]{hyperref}
+\usepackage{amssymb, amsfonts, amsmath, amsthm, mathtools, mathrsfs, bm, calc} %% 和数学相关的一些宏包
+\RequirePackage{bookmark}
+\RequirePackage{graphicx}
+\RequirePackage{setspace}
+\RequirePackage{fancyhdr}
+\RequirePackage{needspace}
+\RequirePackage{lastpage}
+\RequirePackage{chngcntr}  % 图标按章节编号
+\RequirePackage{placeins}  % 图片仅限本章浮动
+\RequirePackage{float}  % 浮动体的 H 选项
+\RequirePackage{caption,subcaption}  % 标题控制
+\RequirePackage{listings}  % 代码环境
+\RequirePackage{xcolor}  % 颜色支持
+\RequirePackage{tcolorbox}  % 文本框
+\RequirePackage{longtable}  % 长表格
+\RequirePackage{makecell}  % 表格线宽支持
+\RequirePackage{booktabs}  % 三线表支持
+\RequirePackage{bigstrut} %% 该宏包提供 \bigstrut 命令，可以增大表格的行间距
+\RequirePackage[backend=biber,style=gb7714-2015,gbnamefmt=lowercase,refsegment=part,defernumbers=true,gbtype=true,]{biblatex}  % 支持参考文献
+\RequirePackage{emptypage} %% 此宏包负责的任务是当每一章最后一页是偶数页时，设置空白
+\RequirePackage{tikz}
+\RequirePackage{indentfirst}
+\RequirePackage[final]{pdfpages}
+\RequirePackage{titlesec}  % titlespacing
+\RequirePackage[titles]{tocloft}  % 用于设置目录条目
+\RequirePackage{suffix}  % 定义 * 命令
+\RequirePackage{varwidth}  
+\RequirePackage{ulem}  % 删除线  
+
+% Options
+
+% More declarations
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 全局设置 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%====================添加中文字体族====================%
+\setCJKfamilyfont{SimSun}[AutoFakeBold={2.17}]{宋体}
+\setCJKfamilyfont{SimHei}[AutoFakeBold={2.17}]{黑体}
+\setCJKfamilyfont{KaiTi}[AutoFakeBold={2.17}]{楷体}
+%====================定义字体命令====================%
+\def\songti{\CJKfamily{SimSun}}
+\def\heiti{\CJKfamily{SimHei}}
+\def\kaiti{\CJKfamily{KaiTi}}
+% 设置默认字体，中文默认宋体，西文默认 Times New Roman
+\setCJKmainfont{宋体}[AutoFakeBold={2.17}]  % 中文默认字体
+\setmainfont{Times New Roman}  % 西文默认字体
+
+% 章节标题
+\ctexset{
+	section = {  % 一级标题
+		format = \centering\heiti\zihao{-3},  % 黑体小三居中
+		name = {第, 章},
+	},
+	subsection = {  % 二级标题
+		format = \heiti\zihao{4},  % 黑体四号
+	},
+	subsubsection = {  % 三级标题
+		format = \heiti\zihao{-4},  % 黑体小四
+        indent = 2\ccwd,  % 缩进两字符
+	}
+}
+
+% 定义标题命令
+\newcommand{\chap}[1]{%
+	\clearpage  % 每章另起一页
+    \FloatBarrier  % 清除浮动体，也就是输出上一章的图表
+    \vspace*{-.5\baselineskip}  % 调整章标题与页眉顶部的间距
+	\section{#1}
+}
+\newcommand{\sect}[1]{\subsection{#1}}
+\newcommand{\subsect}[1]{\subsubsection{#1}}
+
+% 附录之后的章节标题及图表设置
+\let\old@appendix\appendix
+\renewcommand\appendix{
+    \old@appendix
+    \addcontentsline{toc}{section}{附录}  % 添加附录到目录
+    \ctexset{section/format=\centering\heiti\zihao{3}}  % 黑体三号居中
+    \def\chap##1{%
+        \clearpage  % 每章另起一页
+        \FloatBarrier  % 清除浮动体，也就是输出上一章的图表
+        \vspace*{-.5\baselineskip}  % 调整章标题与页眉顶部的间距
+        \stepcounter{section}
+        \section*{附录\thesection\hspace{\ccwd}##1}
+        \addcontentsline{toc}{subsection}{附录\thesection\hspace{\ccwd}##1}  % 为一级标题添加目录项
+    }
+    \def\sect##1{
+        \setcounter{subsubsection}{0}
+        \stepcounter{subsection}
+        \subsection*{\thesubsection\hspace{\ccwd}##1}
+        % \addcontentsline{toc}{subsubsection}{\thesubsection\hspace{\ccwd}##1}  % 为二级标题添加目录项
+    }
+    \def\subsect##1{
+        \stepcounter{subsubsection}
+        \subsubsection*{\thesubsubsection\hspace{\ccwd}##1}
+    }
+    \renewcommand{\thefigure}{\thesection\arabic{figure}}  % 图几几
+    \renewcommand{\thetable}{\thesection\arabic{table}}  % 表几几
+}
+
+% 页眉页脚预设置
+\pagestyle{fancy}
+\fancyhf{}
+
+% 页眉设置
+\fancyhead[L]{  % 设置页眉左侧
+    \raisebox{-.1cm}{\includegraphics[height=1.15cm]{figure/csust_logo_and_name2.pdf}}
+}
+\fancyhead[R]{\let\\=\relax\heiti\zihao{-5}\csustThesis@title}  % 设置页眉右侧
+
+% 长度变量，定义各种封面时使用
+\newlength{\maxwidth}
+\newcommand{\titleBoxLen}{11cm}
+\newcommand{\len}{8cm}
+\newcommand{\llen}{6cm}
+
+% 图表名格式设置
+\captionsetup{font=small,labelsep=space}  % 图表标题设为五号字体、序号与图表名之间以空格分隔
+\captionsetup[table]{font={small,bf},labelsep=space}  % 表标题设为五号加粗、表序与表名之间以空格分隔
+\counterwithin{figure}{section}  % 图按章节编号
+\counterwithin{table}{section}  % 表按章节编号
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}  % 图几.几
+\renewcommand{\thetable}{\thesection-\arabic{table}}  % 表几-几
+
+% 增大表格间距
+% \renewcommand{\arraystretch}{1.2}
+
+% 代码抄录的一系列设置
+\lstset{
+    basicstyle=\footnotesize\ttfamily, 
+    flexiblecolumns, 
+    numbers=left, 
+    numbersep=5pt, 
+    numberstyle=\tiny, 
+    backgroundcolor=\color{white}, 
+    frame=single, 
+    breaklines=true, 
+    showtabs=false, 
+    showspaces=false, 
+    showstringspaces=false, 
+    keywordstyle=\color{teal}, 
+    commentstyle=\color{blue}, 
+    stringstyle=\color{red}, 
+    numberstyle=\color{gray}, 
+    tabsize=8, 
+    breakatwhitespace=false, 
+    postbreak=\mbox{\textcolor{violet}{$\hookrightarrow$}\space}
+} %% 代码抄录的一系列设置
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 文档类 csustThesis 的完整代码参见 csustThesis.cls 文件。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{lstlisting}
+% 文档类 csustThesis 完整代码参见 csustThesis.cls 文件。
 
 
 \chap{插图与表格汇总}  % 附录 C
