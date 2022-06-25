@@ -43,16 +43,26 @@
 % More declarations
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 全局设置 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%====================添加中文字体族====================%
-\setCJKfamilyfont{SimSun}[AutoFakeBold={2.17}]{宋体}
-\setCJKfamilyfont{SimHei}[AutoFakeBold={2.17}]{黑体}
-\setCJKfamilyfont{KaiTi}[AutoFakeBold={2.17}]{楷体}
-%====================定义字体命令====================%
-\def\songti{\CJKfamily{SimSun}}
-\def\heiti{\CJKfamily{SimHei}}
-\def\kaiti{\CJKfamily{KaiTi}}
-% 设置默认字体，中文默认宋体，西文默认 Times New Roman
-\setCJKmainfont{宋体}[AutoFakeBold={2.17}]  % 中文默认字体
+\IfFontExistsTF{宋体}{
+    \setCJKmainfont{宋体}[AutoFakeBold={2.17}]  % 中文默认字体
+	\setCJKfamilyfont{SimSun}[AutoFakeBold={2.17}]{宋体}
+    \renewcommand\songti{\CJKfamily{SimSun}}
+}{
+    % TODO: 非 Windows 平台没有宋体的情况
+}
+\IfFontExistsTF{黑体}{
+    \setCJKfamilyfont{SimHei}[AutoFakeBold={2.17}]{黑体}
+    \renewcommand\heiti{\CJKfamily{SimHei}}
+}{
+    % TODO: 非 Windows 平台没有黑体的情况
+}
+\IfFontExistsTF{楷体}{
+    \setCJKfamilyfont{KaiTi}[AutoFakeBold={2.17}]{楷体}
+    \renewcommand\kaishu{\CJKfamily{KaiTi}}
+}{
+    % TODO: 非 Windows 平台没有楷体的情况
+}
+\newcommand\kaiti{\kaishu}
 \setmainfont{Times New Roman}  % 西文默认字体
 
 % 章节标题
