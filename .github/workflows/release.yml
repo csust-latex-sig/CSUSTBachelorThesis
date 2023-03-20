@@ -18,10 +18,10 @@ jobs:
 
       - name: Install Build Dependencies
         run: |
-          apt-get update
+          sudo apt-get update
           # from http://askubuntu.com/a/25614
-          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections
-          DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y ttf-mscorefonts-installer biber make texlive-lang-chinese texlive-xetex
+          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
+          DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC sudo apt-get install -y ttf-mscorefonts-installer biber make texlive-lang-chinese texlive-xetex
 
       - name: Build
         run: make release
