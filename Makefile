@@ -1,8 +1,12 @@
-.PHONY: all clean
+.PHONY: all release clean
 
 common_deps := csustThesis.cls baseinfo.tex reference.bib
 
-all: thesis.pdf research_proposal.pdf task_book.pdf translation.pdf
+all: thesis.pdf research_proposal.pdf task_book.pdf translation.pdf slides/slides.pdf
+
+release: thesis.pdf research_proposal.pdf task_book.pdf translation.pdf slides/slides.pdf
+	mkdir -p release
+	mv $^ release
 
 thesis.pdf: thesis.tex ${common_deps}
 	xelatex thesis
