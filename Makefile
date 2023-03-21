@@ -36,4 +36,7 @@ slides/slides.pdf: slides/slides.tex
 	cd slides && xelatex slides && xelatex slides
 
 clean:
-	-rm *.aux *.bbl *.bcf *.blg *.lof *.log *.pdf *.run.xml *.toc slides/*.pdf
+	-rm *.aux *.bbl *.bcf *.blg *.lof *.log *.pdf *.run.xml *.toc *.lot
+	-cd slides && rm *.aux *.log *.nav *.out *.pdf *.snm *.toc
+	-rm -rf release
+	-rm body/*.aux
