@@ -593,7 +593,7 @@
         \makebox[\maxwidth][s]{学生姓名}\underline{\makebox[4.15cm][c]{\csustThesis@stuName}}
         \makebox[5.85cm][r]{\mbox{学\hspace{.5em}号}\underline{\makebox[4.15cm][c]{\csustThesis@stuID}}}
 
-        \makebox[\maxwidth][s]{指导教师}\underline{\makebox[4.15cm][c]{}}
+        \makebox[\maxwidth][s]{指导教师}\underline{\makebox[4.15cm][c]{\csustThesis@supervisorName}}
         \makebox[5.85cm][r]{}
 
         \makebox[\maxwidth][s]{教研室主任}\underline{\makebox[4.15cm][c]{}}
