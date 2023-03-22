@@ -2,10 +2,11 @@
 
 common_deps := csustThesis.cls baseinfo.tex reference.bib
 body_deps := body/*.tex
+pdfs := thesis.pdf research_proposal.pdf task_book.pdf translation.pdf slides/slides.pdf
 
-all: thesis.pdf research_proposal.pdf task_book.pdf translation.pdf slides/slides.pdf
+all: ${pdfs}
 
-release: thesis.pdf research_proposal.pdf task_book.pdf translation.pdf slides/slides.pdf
+release: ${pdfs}
 	mkdir -p release
 	mv $^ release
 
@@ -41,3 +42,4 @@ clean:
 	-cd slides && rm -f *.aux *.log *.nav *.out *.snm *.toc
 	-rm -rf release
 	-rm -f body/*.aux
+	-rm -f ${pdfs}
