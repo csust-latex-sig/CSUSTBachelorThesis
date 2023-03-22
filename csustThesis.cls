@@ -436,6 +436,17 @@
         \vspace{2\baselineskip}
         \mbox{\zihao{-0}\bfseries 外文译文及原文}
 
+    {\zihao{-2} \phantom{一行}\\}
+
+    \begin{spacing}{1.63}
+    \bfseries\zihao{3}
+    \settowidth{\maxwidth}{学生姓名}
+				\makebox[\maxwidth][s]{译文出处}：
+        \begin{minipage}[t][\baselineskip][t]{\len}
+					% 暂不支持自动生成译文出处，只能在此手动修改了
+					\zihao{-4}Adams P. The title of the work[J]. The name of the journal, 1993, 4(2): 201-213.
+        \end{minipage}
+    \end{spacing}
     
     {\zihao{-2} \phantom{一行}\\ \phantom{两行}\\}
 
