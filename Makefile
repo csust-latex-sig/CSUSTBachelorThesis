@@ -1,6 +1,7 @@
 .PHONY: all release clean
 
 common_deps := csustThesis.cls baseinfo.tex reference.bib
+body_deps := body/*.tex
 
 all: thesis.pdf research_proposal.pdf task_book.pdf translation.pdf slides/slides.pdf
 
@@ -8,7 +9,7 @@ release: thesis.pdf research_proposal.pdf task_book.pdf translation.pdf slides/s
 	mkdir -p release
 	mv $^ release
 
-thesis.pdf: thesis.tex ${common_deps}
+thesis.pdf: thesis.tex ${common_deps} ${body_deps}
 	xelatex thesis
 	biber thesis
 	xelatex thesis
