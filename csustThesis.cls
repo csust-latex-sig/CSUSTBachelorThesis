@@ -258,6 +258,12 @@
     \def\csustThesis@translation@month{#2}
 }
 
+% 定义外文译文出处的命令
+\newcommand{\csustThesis@translationRef}{}
+\newcommand{\translationRef}[1]{
+    \def\csustThesis@translationRef{#1}
+}
+
 % 定义开题报告完成年月的命令
 \newcommand{\csustThesis@researchProposal@year}{}
 \newcommand{\csustThesis@researchProposal@month}{}
@@ -443,8 +449,7 @@
     \settowidth{\maxwidth}{学生姓名}
 				\makebox[\maxwidth][s]{译文出处}：
         \begin{minipage}[t][\baselineskip][t]{\len}
-					% 暂不支持自动生成译文出处，只能在此手动修改了
-					\zihao{-4}Adams P. The title of the work[J]. The name of the journal, 1993, 4(2): 201-213.
+					\zihao{-4}{\csustThesis@translationRef}
         \end{minipage}
     \end{spacing}
     
