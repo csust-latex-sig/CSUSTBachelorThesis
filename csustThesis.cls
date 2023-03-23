@@ -258,6 +258,12 @@
     \def\csustThesis@translation@month{#2}
 }
 
+% 定义外文译文出处的命令
+\newcommand{\csustThesis@translationRef}{}
+\newcommand{\translationRef}[1]{
+    \def\csustThesis@translationRef{#1}
+}
+
 % 定义开题报告完成年月的命令
 \newcommand{\csustThesis@researchProposal@year}{}
 \newcommand{\csustThesis@researchProposal@month}{}
@@ -436,6 +442,16 @@
         \vspace{2\baselineskip}
         \mbox{\zihao{-0}\bfseries 外文译文及原文}
 
+    {\zihao{-2} \phantom{一行}\\}
+
+    \begin{spacing}{1.63}
+    \bfseries\zihao{3}
+    \settowidth{\maxwidth}{学生姓名}
+				\makebox[\maxwidth][s]{译文出处}：
+        \begin{minipage}[t][\baselineskip][t]{\len}
+					\zihao{-4}{\csustThesis@translationRef}
+        \end{minipage}
+    \end{spacing}
     
     {\zihao{-2} \phantom{一行}\\ \phantom{两行}\\}
 
