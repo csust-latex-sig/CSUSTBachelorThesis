@@ -3,6 +3,7 @@
 common_deps := csustThesis.cls baseinfo.tex reference.bib
 body_deps := body/*.tex
 pdfs := thesis.pdf research_proposal.pdf task_book.pdf translation.pdf slides/slides.pdf
+tmp_files := *.aux *.bbl *.bcf *.blg *.lof *.log *.run.xml *.toc *.lot *.nav *.out *.snm *.toc
 
 all: ${pdfs}
 
@@ -38,8 +39,8 @@ slides/slides.pdf: slides/slides.tex
 	cd slides && xelatex slides && xelatex slides
 
 clean:
-	-rm -f *.aux *.bbl *.bcf *.blg *.lof *.log *.run.xml *.toc *.lot
-	-cd slides && rm -f *.aux *.log *.nav *.out *.snm *.toc
+	-rm -f ${tmp_files}
+	-cd slides && rm -f ${tmp_files}
+	-cd body && rm -f ${tmp_files}
 	-rm -rf release
-	-rm -f body/*.aux
 	-rm -f ${pdfs}
