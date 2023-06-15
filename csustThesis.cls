@@ -26,7 +26,8 @@
 \RequirePackage{makecell}  % 表格线宽支持
 \RequirePackage{booktabs}  % 三线表支持
 \RequirePackage{bigstrut} %% 该宏包提供 \bigstrut 命令，可以增大表格的行间距
-\RequirePackage[backend=biber,style=gb7714-2015,gbnamefmt=lowercase,refsegment=part,defernumbers=true,gbtype=true,]{biblatex}  % 支持参考文献
+%使用 gbpuction=false和gbpub=false可以防止参考文献中出现//，具体问题可见：https://shorturl.at/deszM，双斜杠代表它之前的文献出自于双斜杠后的专著。但是学校要求不能出现//。
+\RequirePackage[backend=biber,style=gb7714-2015,gbnamefmt=lowercase,refsegment=part,defernumbers=true,gbtype=true,gbpunctin=false,gbpub=false]{biblatex}  % 支持参考文献
 \RequirePackage{emptypage} %% 此宏包负责的任务是当每一章最后一页是偶数页时，设置空白
 \RequirePackage{tikz}
 \RequirePackage{indentfirst}
@@ -36,6 +37,12 @@
 \RequirePackage{suffix}  % 定义 * 命令
 \RequirePackage{varwidth}  
 \RequirePackage{ulem}  % 删除线  
+\RequirePackage{pifont} % 用来显示 ①
+% 控制 ① 得字体大小 见：https://tex.stackexchange.com/a/130236
+\let\oldding\ding% Store old \ding in \oldding
+\renewcommand{\ding}[2][1]{\scalebox{#1}{\oldding{#2}}}% Scale \oldding via optional argument，默认大小1，一般1.3倍较合适。
+
+
 
 
 % Options
@@ -69,7 +76,7 @@
 \ctexset{
 	section = {  % 一级标题
 		format = \centering\heiti\zihao{-3},  % 黑体小三居中
-		name = {第, 章},
+		% name = {第, 章}, 实际上不需要第x章，直接编号即可。
 	},
 	subsection = {  % 二级标题
 		format = \heiti\zihao{4},  % 黑体四号
@@ -137,6 +144,8 @@
 % 图表名格式设置
 \captionsetup{font=small,labelsep=space}  % 图表标题设为五号字体、序号与图表名之间以空格分隔
 \captionsetup[table]{font={small,bf},labelsep=space}  % 表标题设为五号加粗、表序与表名之间以空格分隔
+% 公式按照一级标题开始编号 1.x 表示第一章里面得公式x
+\numberwithin{equation}{section} % 设置公式按照一级标题标号
 \counterwithin{figure}{section}  % 图按章节编号
 \counterwithin{table}{section}  % 表按章节编号
 \renewcommand{\thefigure}{\thesection.\arabic{figure}}  % 图几.几
