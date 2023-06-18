@@ -123,6 +123,7 @@
     }
     \renewcommand{\thefigure}{\thesection\arabic{figure}}  % 图几几
     \renewcommand{\thetable}{\thesection\arabic{table}}  % 表几几
+    \renewcommand{\theequation}{\thesection\arabic{equation}}  % 公式(Ax)
 }
 
 % 页眉页脚预设置
@@ -144,13 +145,13 @@
 % 图表名格式设置
 \captionsetup{font=small,labelsep=space}  % 图表标题设为五号字体、序号与图表名之间以空格分隔
 \captionsetup[table]{font={small,bf},labelsep=space}  % 表标题设为五号加粗、表序与表名之间以空格分隔
-% 公式按照一级标题开始编号 1.x 表示第一章里面得公式x
-\numberwithin{equation}{section} % 设置公式按照一级标题标号
 \counterwithin{figure}{section}  % 图按章节编号
 \counterwithin{table}{section}  % 表按章节编号
+\counterwithin{equation}{section} % 公式按章节编号
 \renewcommand{\thefigure}{\thesection.\arabic{figure}}  % 图几.几
 \renewcommand{\thetable}{\thesection-\arabic{table}}  % 表几-几
-
+% 公式按照一级标题开始编号 (1.x) 表示第一章里面得公式 x
+\renewcommand{\theequation}{\thesection-\arabic{equation}} % 设置公式编号格式
 % 增大表格间距
 % \renewcommand{\arraystretch}{1.2}
 
