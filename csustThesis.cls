@@ -74,25 +74,28 @@
 
 % 章节标题
 \ctexset{
-	section = {  % 一级标题
-		format = \centering\heiti\zihao{-3},  % 黑体小三居中
-		% name = {第, 章}, 实际上不需要第x章，直接编号即可。
-	},
-	subsection = {  % 二级标题
-		format = \heiti\zihao{4},  % 黑体四号
-	},
-	subsubsection = {  % 三级标题
-		format = \heiti\zihao{-4},  % 黑体小四
+    section = {  % 一级标题
+        format = \centering\heiti\zihao{-3},  % 黑体小三居中
+        aftername = \hspace*{1ex},
+    },
+    subsection = {  % 二级标题
+        format = \heiti\zihao{4},  % 黑体四号
+        aftername = \hspace*{1ex},
+    },
+    subsubsection = {  % 三级标题
+        format = \heiti\zihao{-4},  % 黑体小四
+        aftername = \hspace*{1ex},
         indent = 2\ccwd,  % 缩进两字符
-	}
+    }
 }
 
 % 定义标题命令
 \newcommand{\chap}[1]{%
-	\clearpage  % 每章另起一页
     \FloatBarrier  % 清除浮动体，也就是输出上一章的图表
+    \clearpage  % 每章另起一页
+    \phantomsection
     \vspace*{-.5\baselineskip}  % 调整章标题与页眉顶部的间距
-	\section{#1}
+    \section{#1}
 }
 \newcommand{\sect}[1]{\subsection{#1}}
 \newcommand{\subsect}[1]{\subsubsection{#1}}
@@ -101,6 +104,7 @@
 \let\old@appendix\appendix
 \renewcommand\appendix{
     \old@appendix
+    \phantomsection
     \addcontentsline{toc}{section}{附录}  % 添加附录到目录
     \ctexset{section/format=\centering\heiti\zihao{3}}  % 黑体三号居中
     \def\chap##1{%
@@ -108,18 +112,19 @@
         \FloatBarrier  % 清除浮动体，也就是输出上一章的图表
         \vspace*{-.5\baselineskip}  % 调整章标题与页眉顶部的间距
         \stepcounter{section}
-        \section*{附录\thesection\hspace{\ccwd}##1}
-        \addcontentsline{toc}{subsection}{附录\thesection\hspace{\ccwd}##1}  % 为一级标题添加目录项
+        \phantomsection
+        \section*{附录\thesection\hspace{1ex}##1}
+        \addcontentsline{toc}{subsection}{附录\thesection\hspace{1ex}##1}  % 为一级标题添加目录项
     }
     \def\sect##1{
         \setcounter{subsubsection}{0}
         \stepcounter{subsection}
-        \subsection*{\thesubsection\hspace{\ccwd}##1}
-        % \addcontentsline{toc}{subsubsection}{\thesubsection\hspace{\ccwd}##1}  % 为二级标题添加目录项
+        \subsection*{\thesubsection\hspace{1ex}##1}
+        % \addcontentsline{toc}{subsubsection}{\thesubsection\hspace{1ex}##1}  % 为二级标题添加目录项
     }
     \def\subsect##1{
         \stepcounter{subsubsection}
-        \subsubsection*{\thesubsubsection\hspace{\ccwd}##1}
+        \subsubsection*{\thesubsubsection\hspace{1ex}##1}
     }
     \renewcommand{\thefigure}{\thesection\arabic{figure}}  % 图几几
     \renewcommand{\thetable}{\thesection\arabic{table}}  % 表几几
@@ -434,6 +439,7 @@
     \renewcommand\contentsname{\heiti\zihao{3}目\hspace{\ccwd}录}  % 设置目录字样
     \renewcommand\cftsecfont{\heiti}
     \renewcommand\cftsecleader{\cftdotfill{\cftdotsep}}  % 
+    \setlength\cftbeforesecskip{0cm}
 	\tableofcontents
 	\clearpage
 }
