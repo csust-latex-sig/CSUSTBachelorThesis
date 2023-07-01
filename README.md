@@ -30,12 +30,6 @@ make task_book.pdf
 make translation.pdf
 ```
 
-撰写 PPT 请编译 [slides.tex](slides/slides.tex)：
-
-```bash
-make slides/slides.pdf
-```
-
 一次全部编译：
 
 ```bash
@@ -47,6 +41,10 @@ make all
 ```bash
 make clean
 ```
+
+## 相关项目
+
+- [csust-latex-sig/CSUSTGraduationSlides](https://github.com/csust-latex-sig/CSUSTGraduationSlides)：长沙理工大学毕业答辩幻灯片 Beamer 模板。
 
 ## 交流
 
