@@ -1,51 +1,72 @@
-.PHONY: all test release clean
+# use *.* to exclude sub-folders
+template_figs := figure/template/*.*
+thesis_figs := figure/thesis/*
 
 common_deps := csustThesis.cls baseinfo.tex reference.bib
+template_deps := ${template_figs} ${common_deps}
 body_deps := body/*.tex
-pdfs := thesis.pdf research_proposal.pdf task_book.pdf translation.pdf
-tmp_files := *.aux *.bbl *.bcf *.blg *.lof *.log *.run.xml *.toc *.lot *.nav *.out *.snm *.toc
 
-all: ${pdfs}
+# dependencies for each PDF
+thesis_deps := thesis.tex ${template_deps} ${thesis_figs} ${body_deps}
+research_proposal_deps := research_proposal.tex ${template_deps}
+task_book_deps := task_book.tex ${template_deps}
+translation_deps := translation.tex ${template_deps}
 
-test: ${pdfs}
+# these files can be removed by `make clean`
+output_pdfs := thesis.pdf research_proposal.pdf task_book.pdf translation.pdf
+tmp_files := *.aux *.bbl *.bcf *.blg *.lof *.log *.run.xml *.toc *.lot *.nav \
+						 *.out *.snm *.toc
 
-release: ${pdfs}
+# Macros
+compile_pdf = xelatex "$(1)" && \
+								 biber "$(1)" && \
+								 xelatex "$(1)" && \
+								 xelatex "$(1)"
+
+.PHONY: all
+all: ${output_pdfs}
+
+.PHONY: test
+test: ${output_pdfs}
+
+.PHONY: release
+release: ${output_pdfs}
 	mkdir -p release
 	mv $^ release
 
-thesis.pdf: thesis  # deprecated
+# 论文
+.PHONY: thesis
+thesis: thesis.pdf
 
-thesis: thesis.tex ${common_deps} ${body_deps}
-	xelatex thesis
-	biber thesis
-	xelatex thesis
-	xelatex thesis
+thesis.pdf: ${thesis_deps}
+	$(call compile_pdf,thesis)
 
-research_proposal.pdf: research_proposal  # deprecated
+# 开题报告
+.PHONY: research_proposal
+research_proposal: research_proposal.pdf
 
-research_proposal: research_proposal.tex ${common_deps}
-	xelatex research_proposal
-	biber research_proposal
-	xelatex research_proposal
-	xelatex research_proposal
+research_proposal.pdf: ${research_proposal_deps}
+	$(call compile_pdf,research_proposal)
 
-task_book.pdf: task_book  # deprecated
+# 任务书
+.PHONY: task_book
+task_book: task_book.pdf
 
-task_book: task_book.tex ${common_deps}
-	xelatex task_book
-	biber task_book
-	xelatex task_book
-	xelatex task_book
+task_book.pdf: ${task_book_deps}
+	$(call compile_pdf,task_book)
 
-translation.pdf: translation  # deprecated
+# 译文
+.PHONY: translation
+translation: translation.pdf
 
-translation: translation.tex ${common_deps}
-	xelatex translation
-	biber translation
-	xelatex translation
-	xelatex translation
+translation.pdf: ${translation_deps}
+	$(call compile_pdf,translation)
 
+.PHONY: clean
 clean:
-	-rm -f ${tmp_files}
-	-cd body && rm -f ${tmp_files}
-	-rm -rf release
+	@echo "注意！！！以下生成的 PDF 也会被删除："
+	@echo "${output_pdfs}"
+	-@rm -f ${tmp_files}
+	-@cd body && rm -f ${tmp_files}
+	-@rm -rf release/
+	-@rm -f ${output_pdfs}
