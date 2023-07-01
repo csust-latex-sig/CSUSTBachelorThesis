@@ -2,7 +2,7 @@
 
 common_deps := csustThesis.cls baseinfo.tex reference.bib
 body_deps := body/*.tex
-pdfs := thesis.pdf research_proposal.pdf task_book.pdf translation.pdf slides/slides.pdf
+pdfs := thesis.pdf research_proposal.pdf task_book.pdf translation.pdf
 tmp_files := *.aux *.bbl *.bcf *.blg *.lof *.log *.run.xml *.toc *.lot *.nav *.out *.snm *.toc
 
 all: ${pdfs}
@@ -45,13 +45,7 @@ translation: translation.tex ${common_deps}
 	xelatex translation
 	xelatex translation
 
-slides/slides.pdf: slide  # deprecated
-
-slide: slides/slides.tex
-	cd slides && xelatex slides && xelatex slides
-
 clean:
 	-rm -f ${tmp_files}
-	-cd slides && rm -f ${tmp_files}
 	-cd body && rm -f ${tmp_files}
 	-rm -rf release
