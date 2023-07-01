@@ -137,7 +137,7 @@
 
 % 页眉设置
 \fancyhead[L]{  % 设置页眉左侧
-    \raisebox{-.1cm}{\includegraphics[height=1.15cm]{figure/csust_logo_and_name2.pdf}}
+    \raisebox{-.1cm}{\includegraphics[height=1.15cm]{figure/template/csust_logo_and_name2.pdf}}
 }
 \fancyhead[R]{\let\\=\relax\heiti\zihao{-5}\csustThesis@title}  % 设置页眉右侧
 
@@ -299,7 +299,7 @@
 
     \begin{center}
         \vspace*{1.2\baselineskip}
-        \includegraphics{figure/csust_logo_and_name.pdf}
+        \includegraphics{figure/template/csust_logo_and_name.pdf}
     \end{center}
     
     \begin{center}
@@ -450,7 +450,7 @@
 \begin{titlepage}
     \begin{center}
         \vspace*{1.2\baselineskip}
-        \includegraphics{figure/csust_logo_and_name.pdf}
+        \includegraphics{figure/template/csust_logo_and_name.pdf}
     
         \vspace*{2.5\baselineskip}
         \mbox{\zihao{-1}\bfseries 毕业设计（论文）资料附件：}
@@ -513,7 +513,7 @@
 
     \begin{center}
         \vspace*{3\baselineskip}
-        \includegraphics[width=9.07cm,height=2.447cm]{figure/csustname_2640by711.png}
+        \includegraphics[width=9.07cm,height=2.447cm]{figure/template/csustname_2640by711.png}
         \vspace*{\baselineskip}
     \end{center}
     
@@ -576,7 +576,7 @@
 
     \begin{center}
         \vspace*{2\baselineskip}
-        \includegraphics[scale=.106]{figure/csustname_2640by712.jpg}
+        \includegraphics[scale=.106]{figure/template/csustname_2640by712.jpg}
     \end{center}
     
     \begin{center}

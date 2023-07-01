@@ -48,6 +48,6 @@ make clean
 
 ## 交流
 
-欢迎加入**长沙理工大学 LaTeX 交流群**。群号**169929184** 。
+欢迎加入**长沙理工大学 LaTeX 交流群**。QQ 群号：**169929184** 。
 
-![](figure/群聊二维码.jpg)
+<img src="figure/doc/qq_group.jpg" alt="长沙理工大学 LaTeX 交流群" height=500>

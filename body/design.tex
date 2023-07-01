@@ -31,7 +31,7 @@
 \RequirePackage[a4paper,top=25mm,bottom=20mm,left=30mm,right=20mm]{geometry}
 \end{lstlisting}
 
-设置页面页眉左侧为 \fbox{\includegraphics[height=1.15cm]{figure/csust_logo_and_name2.pdf}} 、右侧为小论文标题，设置页脚中心为阿拉伯数字编号的“第几页，共几页”样式。页眉页脚文字均为小五号宋体。出于方便考虑，页脚的设置并没有封装在 csustThesis 文档类中。
+设置页面页眉左侧为 \fbox{\includegraphics[height=1.15cm]{figure/template/csust_logo_and_name2.pdf}} 、右侧为小论文标题，设置页脚中心为阿拉伯数字编号的“第几页，共几页”样式。页眉页脚文字均为小五号宋体。出于方便考虑，页脚的设置并没有封装在 csustThesis 文档类中。
 \begin{lstlisting}[numbers=none,language=TeX]
 % 页眉页脚预设置
 \pagestyle{fancy}
@@ -39,7 +39,7 @@
 
 % 页眉设置
 \fancyhead[L]{  % 设置页眉左侧
-    \raisebox{-.1cm}{\includegraphics[height=1.15cm]{figure/csust_logo_and_name2.pdf}}
+    \raisebox{-.1cm}{\includegraphics[height=1.15cm]{figure/template/csust_logo_and_name2.pdf}}
 }
 \fancyhead[R]{\let\\=\relax\heiti\zihao{-5}\csustThesis@title}  % 设置页眉右侧
 
