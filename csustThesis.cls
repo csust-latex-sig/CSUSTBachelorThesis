@@ -131,6 +131,24 @@
     \renewcommand{\theequation}{\thesection\arabic{equation}}  % 公式(Ax)
 }
 
+% 附件环境及其命令，假定用在文档最后
+\newenvironment{attachment}{%
+    \addtocontents{toc}{\cftpagenumbersoff{section}}  % 一级标题目录项不要页码
+    \phantomsection
+    \renewcommand{\thesection}{\arabic{section}}
+    \setcounter{section}{0}
+    \newcommand\attach[1]{%
+        \stepcounter{section}
+        \addcontentsline{toc}{section}{附件\thesection：##1}
+    }
+    \WithSuffix\newcommand\attach*[1]{%
+        \addcontentsline{toc}{section}{##1}
+    }
+}{%
+    \mbox{}\let\attach\undefined
+    \addtocontents{toc}{\cftpagenumberson{section}}  % 一级标题目录项恢复页码
+}
+
 % 页眉页脚预设置
 \pagestyle{fancy}
 \fancyhf{}
