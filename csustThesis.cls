@@ -55,19 +55,19 @@
 	\setCJKfamilyfont{SimSun}[AutoFakeBold={2.17}]{宋体}
     \renewcommand\songti{\CJKfamily{SimSun}}
 }{
-    % TODO: 非 Windows 平台没有宋体的情况
+    % 非 Windows 平台请手动安装宋体
 }
 \IfFontExistsTF{黑体}{
     \setCJKfamilyfont{SimHei}[AutoFakeBold={2.17}]{黑体}
     \renewcommand\heiti{\CJKfamily{SimHei}}
 }{
-    % TODO: 非 Windows 平台没有黑体的情况
+    % 非 Windows 平台请手动安装黑体
 }
 \IfFontExistsTF{楷体}{
     \setCJKfamilyfont{KaiTi}[AutoFakeBold={2.17}]{楷体}
     \renewcommand\kaishu{\CJKfamily{KaiTi}}
 }{
-    % TODO: 非 Windows 平台没有楷体的情况
+    % 非 Windows 平台请手动安装楷体
 }
 \newcommand\kaiti{\kaishu}
 \setmainfont{Times New Roman}  % 西文默认字体

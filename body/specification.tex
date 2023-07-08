@@ -9,6 +9,65 @@
 \label{sec_check}  % 供后文引用
 下载模板后，找到根目录下的 \filename{thesis.tex} 文件，并依次使用 XeLaTeX、Biber、XeLaTeX、XeLaTeX 四次编译\footnote{需要四次编译的原因是存在参考文献引用和各种交叉引用。一次 XeLaTeX 编译不会生成正确的目录和参考文献，并且存在交叉引用的地方会显示为??。}该文件，应当会生成与本文内容相同的 pdf 文档。若运行过程中出现错误，说明存在版本不兼容的问题，或者模板本身有误。此时请检查自己的 \LaTeX 版本是否为 2021 或更新版本，也可自行寻找出错原因并更改模板。
 
+如果你使用的是非 Windows 系统，请参考章节 \ref{sec_fonts} 检查字体。
+
+\sect{安装字体}
+\label{sec_fonts}
+2023 届本科生毕业设计（论文）手册明确要求使用黑体和宋体作为中文字体，实际上使用
+的字体是中易黑体（SimHei）中易宋体（SimSun），本模板还设置了中易楷体（SimKai）
+作为楷体的默认字体，但并未使用\cite{ref:thesis_manual_2023}。由于这几款字体的版
+权均为微软所有，非 Windows 平台上可能会缺少这些字体，从而导致生成的 PDF 所使用
+的字体和标准不一致，甚至可能缺少某些字符，比如“沄”。不过该问题可以通过手动安装
+缺失字体解决。
+
+\subsect{Debian 系微软字体安装方法}
+Debian 系 Linux 发行版的用户可以尝试使用以下命令安装微软字体：
+\begin{lstlisting}[numbers=none,language=bash]
+sudo apt install ttf-mscorefonts-installer
+\end{lstlisting}
+
+\subsect{通用微软字体安装方法}
+由于字体文件是通用的，我们也可以将 Windows 上的字体文件直接复制到其它系统上使用。
+字体文件可以从网上下载也可以自己从 Windows 系统中提取。提取和安装步骤如下：
+
+（1）在 Windows 文件管理器中打开
+\filename{C:\textbackslash{Windows}\textbackslash{Fonts}\textbackslash} 目录，
+搜索中易的拼音（zhongyi），选择黑体、楷体和宋体这三个字体文件，如图
+\ref{fig:select_fonts} 所示。将这三个字体文件复制到新建文件夹，如图
+\ref{fig:copy_fonts} 所示。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\linewidth]{figure/thesis/select_fonts.png}
+	\caption{选择缺失字体}
+	\label{fig:select_fonts}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\linewidth]{figure/thesis/copy_fonts.png}
+	\caption{复制缺失字体}
+	\label{fig:copy_fonts}
+\end{figure}
+
+（2）将字体文件复制到要安装的目标系统上，一般来说如果安装了图形界面，可以通过双
+击字体文件来安装。在 Linux 系统上也可以通过将字体文件复制到家目录下的
+\filename{\$\{HOME\}/.local/share/fonts/} 目录来安装。
+
+\subsect{检查字体}
+在安装完成后可以在系统的字体管理器中查看是否安装成功，也可以使用章节 \ref{sec_check}
+中的方法编译本模板，然后使用可以查看字体属性的 PDF 查看器打开生成的 PDF 文件，
+如果有“SimHei”和“SimSun”等字样则说明安装成功，如图 \ref{fig:pdf_properties} 所示。
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\linewidth]{figure/thesis/pdf_properties.png}
+	\caption{查看 PDF 属性}
+	\label{fig:pdf_properties}
+\end{figure}
+
+也请务必检查下是否有字符缺少支持，比如“沄”是否能成功显示。
+
 \sect{撰写任务书}
 
 撰写任务书的步骤：
