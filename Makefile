@@ -26,13 +26,10 @@ compile_pdf = xelatex "$(1)" && \
 .PHONY: all
 all: ${output_pdfs}
 
-.PHONY: test
-test: ${output_pdfs}
-
 .PHONY: release
 release: ${output_pdfs}
 	mkdir -p release
-	mv $^ release
+	cp $^ release
 
 # 论文
 .PHONY: thesis
