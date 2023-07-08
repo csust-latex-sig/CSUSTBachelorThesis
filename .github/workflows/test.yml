@@ -24,5 +24,10 @@ jobs:
           DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC sudo apt-get install -y ttf-mscorefonts-installer biber make texlive-lang-chinese texlive-xetex
 
       - name: Build
-        run: make test
+        run: make release
 
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Artifacts
+          path: release/
