@@ -208,6 +208,10 @@
     \def\csustThesis@title{#1}
     \def\csustThesis@entitle{#2}
 }
+\newcommand{\csustThesis@title@secunderline}[1]{\underline{#1}}
+\newcommand{\singleLineTitle}{
+    \def\csustThesis@title@secunderline{}
+}
 
 % 论文完成时间
 \newcommand{\csustThesis@completeYear}{}
@@ -332,7 +336,7 @@
         \settowidth{\maxwidth}{题目：}
         \makebox[\maxwidth][s]{题目：}\underline{\makebox[\titleBoxLen][l]{\phantom{幻影}}}
     
-        \hspace*{\maxwidth}\underline{\makebox[\titleBoxLen][l]{\phantom{幻影}}}
+        \hspace*{\maxwidth}\csustThesis@title@secunderline{\makebox[\titleBoxLen][l]{\phantom{幻影}}}
 
         \vspace*{-2\baselineskip}  % 2.78cm
         \hspace*{\maxwidth}
@@ -546,7 +550,7 @@
         \settowidth{\maxwidth}{题目：}
         \makebox[\maxwidth][s]{题目：}\underline{\makebox[\titleBoxLen][c]{\phantom{幻影}}}
     
-        \hspace*{\maxwidth}\underline{\makebox[\titleBoxLen][l]{\phantom{幻影}}}
+        \hspace*{\maxwidth}\csustThesis@title@secunderline{\makebox[\titleBoxLen][l]{\phantom{幻影}}}
 
         \vspace*{-2\baselineskip}
         \hspace*{\maxwidth}
@@ -620,7 +624,7 @@
         \zihao{4}
         \makebox[\maxwidth][l]{题\hspace{1.5em}目}\underline{\makebox[10cm][c]{\phantom{幻影}}}
     
-        \hspace*{\maxwidth}\underline{\makebox[10cm][l]{\phantom{幻影}}}
+        \hspace*{\maxwidth}\csustThesis@title@secunderline{\makebox[10cm][l]{\phantom{幻影}}}
 
         \vspace*{-2\baselineskip}
         \hspace*{\maxwidth}
