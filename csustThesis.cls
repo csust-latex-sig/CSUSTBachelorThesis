@@ -624,7 +624,7 @@
         \zihao{4}
         \makebox[\maxwidth][l]{题\hspace{1.5em}目}\underline{\makebox[10cm][c]{\phantom{幻影}}}
     
-        \hspace*{\maxwidth}\underline{\makebox[10cm][l]{\phantom{幻影}}}
+        \hspace*{\maxwidth}\csustThesis@title@secunderline{\makebox[10cm][l]{\phantom{幻影}}}
 
         \vspace*{-2\baselineskip}
         \hspace*{\maxwidth}
