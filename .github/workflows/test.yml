@@ -21,12 +21,13 @@ jobs:
         run: |
           choco install make
           choco install miktex
-          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-          refreshenv
 
       - name: Build
-        # cannot run release task on Windows
-        run: make all
+        run: |
+          Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+          refreshenv
+          # cannot run `make release` on Windows, so use `make all` here
+          make all
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3
