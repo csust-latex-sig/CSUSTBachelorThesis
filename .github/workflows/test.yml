@@ -20,7 +20,8 @@ jobs:
       - name: Install Build Dependencies
         run: |
           choco install make
-          choco install texlive
+          choco install texlive --params '/collections:xetex'
+          refreshenv
 
       - name: Build
         run: make release
